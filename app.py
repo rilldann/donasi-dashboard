@@ -53,8 +53,9 @@ with colB:
 
 # df = pd.read_sql("SELECT * FROM donasi", engine)
 
-conn_string = st.secrets["SUPABASE_CONN"]
-engine = create_engine(conn_string)
+db_url = os.getenv("SUPABASE_DB_URL")
+
+engine = create_engine(db_url)
 
 # --- 2. PREPROCESS ---
 df['tanggal'] = pd.to_datetime(df['tanggal'])
