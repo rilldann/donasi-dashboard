@@ -1,8 +1,11 @@
 # IMPORT SEMUA LIBRARY YANG DIBUTUHKAN
+import os
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
+from supabase import create_client
+
 
 # JUDUL DASHBOARD
 st.set_page_config(
@@ -50,12 +53,16 @@ with colB:
 
 # --- BACA DATA DARI POSTGRESQL ---
 # engine = create_engine("postgresql://postgres:1@localhost:5432/visualisasi_db")
+url = os.getenv("SUPABASE_URL")
+key = os.getenv("SUPABASE_KEY")
+
+supabase = create_client(url, key)
+
+data = supabase.table("donasi").select("*").execute()
+df = pd.DataFrame(data.data)
+
 
 # df = pd.read_sql("SELECT * FROM donasi", engine)
-
-db_url = os.getenv("SUPABASE_DB_URL")
-
-engine = create_engine(db_url)
 
 # --- 2. PREPROCESS ---
 df['tanggal'] = pd.to_datetime(df['tanggal'])
