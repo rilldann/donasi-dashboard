@@ -49,9 +49,12 @@ with colB:
 # df = pd.read_csv("data/donasi.csv")
 
 # --- BACA DATA DARI POSTGRESQL ---
-engine = create_engine("postgresql://postgres:1@localhost:5432/visualisasi_db")
+# engine = create_engine("postgresql://postgres:1@localhost:5432/visualisasi_db")
 
-df = pd.read_sql("SELECT * FROM donasi", engine)
+# df = pd.read_sql("SELECT * FROM donasi", engine)
+
+conn_string = st.secrets["SUPABASE_CONN"]
+engine = create_engine(conn_string)
 
 # --- 2. PREPROCESS ---
 df['tanggal'] = pd.to_datetime(df['tanggal'])
