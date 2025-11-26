@@ -53,6 +53,8 @@ with colB:
 
 # --- BACA DATA DARI POSTGRESQL ---
 # engine = create_engine("postgresql://postgres:1@localhost:5432/visualisasi_db")
+# df = pd.read_sql("SELECT * FROM donasi", engine)
+
 url = os.getenv("SUPABASE_URL")
 key = os.getenv("SUPABASE_KEY")
 
@@ -62,7 +64,6 @@ data = supabase.table("donasi").select("*").execute()
 df = pd.DataFrame(data.data)
 
 
-# df = pd.read_sql("SELECT * FROM donasi", engine)
 
 # --- 2. PREPROCESS ---
 df['tanggal'] = pd.to_datetime(df['tanggal'])
