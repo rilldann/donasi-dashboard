@@ -55,13 +55,13 @@ with colB:
 # engine = create_engine("postgresql://postgres:1@localhost:5432/visualisasi_db")
 # df = pd.read_sql("SELECT * FROM donasi", engine)
 
-# url = os.getenv("SUPABASE_URL")
-# key = os.getenv("SUPABASE_KEY")
+url = os.getenv("SUPABASE_URL")
+key = os.getenv("SUPABASE_KEY")
 
-# supabase = create_client(url, key)
+supabase = create_client(url, key)
 
-# data = supabase.table("donasi").select("*").execute()
-# df = pd.DataFrame(data.data)
+data = supabase.table("donasi").select("*").execute()
+df = pd.DataFrame(data.data)
 
 # --- 2. PREPROCESS ---
 df['tanggal'] = pd.to_datetime(df['tanggal'])
